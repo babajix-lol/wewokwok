@@ -35,9 +35,6 @@ Gameplay utama dari `Eclipse Ball` adalah mengontrol bola menggunakan kemiringan
 - Pengelolaan sensor yang menyesuaikan lifecycle aplikasi
 - Penanganan aman jika sensor tertentu tidak tersedia pada perangkat
 
-## Tujuan implementasi
-
-Aplikasi ini dibuat untuk memenuhi tugas pengembangan aplikasi Android dengan ketentuan menggunakan minimal dua sensor dari kategori yang berbeda, serta memastikan bahwa masing-masing sensor memberikan dampak langsung terhadap UI atau pengalaman pengguna.
 
 ## Teknologi yang digunakan
 
@@ -45,6 +42,3 @@ Aplikasi ini dibuat untuk memenuhi tugas pengembangan aplikasi Android dengan ke
 - `Jetpack Compose`
 - `Android Sensor Framework`
 
-## Catatan
-
-Jika perangkat tidak mendukung salah satu sensor, aplikasi tetap harus menangani kondisi tersebut secara aman tanpa crash, misalnya dengan menampilkan informasi bahwa fitur sensor tertentu tidak tersedia.
