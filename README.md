@@ -1,66 +1,50 @@
-# Eclipse Ball 🌒
+# Eclipse Ball
 
-A multi-sensor Android balance game built with Kotlin and Jetpack Compose.
+`Eclipse Ball` adalah game interaktif Android berbasis `Kotlin` dan `Jetpack Compose` yang memanfaatkan sensor perangkat untuk menciptakan pengalaman bermain yang responsif terhadap gerakan dan kondisi cahaya sekitar.
 
----
+## Deskripsi singkat
 
-## Overview
+Pada game ini, pemain menggerakkan bola dengan memiringkan smartphone. Posisi bola akan berubah mengikuti arah kemiringan perangkat, sehingga pemain dapat mencoba menjaga atau mengarahkan bola ke area target. Selain itu, tampilan game juga akan berubah secara dinamis sesuai kondisi cahaya di sekitar pengguna.
 
-**Eclipse Ball** is a polished mini-game where players navigate a ball into concentric target circles using physical device motion, while ambient light levels dynamically shift the app's visual atmosphere and theme.
+## Sensor yang digunakan
 
----
+### 1. Accelerometer
+- Kategori: `Motion Sensor`
+- Fungsi:
+  Sensor ini digunakan untuk membaca gerakan atau kemiringan perangkat pada sumbu tertentu.
+- Pengaruh pada game:
+  Nilai dari accelerometer digunakan untuk menggerakkan bola di dalam arena permainan secara real-time.
 
-## Sensors Used
+### 2. Light Sensor
+- Kategori: `Environment Sensor`
+- Fungsi:
+  Sensor ini mendeteksi intensitas cahaya di sekitar perangkat.
+- Pengaruh pada game:
+  Data cahaya digunakan untuk mengubah mode tampilan game, misalnya dari mode terang ke mode gelap atau `eclipse mode`, lengkap dengan perubahan warna, kontras, dan efek visual.
 
-1. **Accelerometer** (`Sensor.TYPE_ACCELEROMETER`)
-   - **Category**: Motion Sensor
-   - **UI/UX Impact**: Controls physical ball movement (X and Y displacement) inside the arena. Tilting the device moves the ball across concentric target rings towards the bullseye.
+## Konsep gameplay
 
-2. **Ambient Light Sensor** (`Sensor.TYPE_LIGHT`)
-   - **Category**: Environment Sensor
-   - **UI/UX Impact**: Dynamically changes visual theme and UI atmosphere based on ambient lighting:
-     - **Bright Mode** (`> 80 lx`): Vibrant daylight palette with high-contrast target rings.
-     - **Dim Mode** (`15 - 80 lx`): Warm twilight tones with muted accents.
-     - **Eclipse Mode** (`< 15 lx`): Deep cosmic dark theme with neon cyan and violet glowing halos, glowing ball aura, and vibrant neon arena rings.
+Gameplay utama dari `Eclipse Ball` adalah mengontrol bola menggunakan kemiringan perangkat. Pemain perlu menyesuaikan posisi ponsel agar bola bergerak sesuai arah yang diinginkan. Saat kondisi ruangan berubah menjadi lebih gelap, game akan masuk ke mode visual yang lebih redup dan dramatis, sehingga pengalaman bermain terasa lebih dinamis.
 
----
+## Fitur utama
 
-## Lifecycle Handling
+- Kontrol bola menggunakan `accelerometer`
+- Perubahan tampilan berdasarkan `light sensor`
+- Antarmuka dibuat dengan `Jetpack Compose`
+- Arena permainan interaktif dengan target lingkaran
+- Pengelolaan sensor yang menyesuaikan lifecycle aplikasi
+- Penanganan aman jika sensor tertentu tidak tersedia pada perangkat
 
-- **Lifecycle Aware**: Uses `LocalLifecycleOwner` and `DisposableEffect` to listen for lifecycle events (`ON_RESUME` / `ON_PAUSE`).
-- **Energy & Memory Efficiency**: Sensor listeners are registered on `ON_RESUME` and unregistered on `ON_PAUSE` or screen disposal to prevent battery drain.
-- **Duplicate Protection**: `SensorCoordinator` guards against duplicate registrations.
+## Tujuan implementasi
 
----
+Aplikasi ini dibuat untuk memenuhi tugas pengembangan aplikasi Android dengan ketentuan menggunakan minimal dua sensor dari kategori yang berbeda, serta memastikan bahwa masing-masing sensor memberikan dampak langsung terhadap UI atau pengalaman pengguna.
 
-## Hardware Fallback & Availability
+## Teknologi yang digunakan
 
-- **Accelerometer Unavailable**: Blocks motion gameplay safely and displays a prominent warning banner explaining that motion controls are unsupported.
-- **Light Sensor Unavailable**: Defaults gracefully to **Bright Mode** theme while keeping motion controls fully playable, and displays a status message stating: *"Ambient light sensor not supported on this device"*.
+- `Kotlin`
+- `Jetpack Compose`
+- `Android Sensor Framework`
 
----
+## Catatan
 
-## Project Structure
-
-```text
-app/src/main/java/com/example/wewokwok/
-├── MainActivity.kt
-├── sensors/
-│   └── SensorCoordinator.kt
-├── state/
-│   ├── GameUiState.kt
-│   ├── GameViewModel.kt
-│   └── LightMode.kt
-└── ui/
-    ├── BalanceGameScreen.kt
-    └── components/
-        └── SensorStatusBanner.kt
-```
-
----
-
-## How to Run
-
-1. Open the project in **Android Studio**.
-2. Connect a physical Android device (recommended for testing real accelerometer and ambient light sensor readings) or run on an Android Emulator with Virtual Sensors enabled in Extended Controls.
-3. Select the `app` run configuration and click **Run** (`Shift + F10`).
+Jika perangkat tidak mendukung salah satu sensor, aplikasi tetap harus menangani kondisi tersebut secara aman tanpa crash, misalnya dengan menampilkan informasi bahwa fitur sensor tertentu tidak tersedia.
